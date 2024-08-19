@@ -43,43 +43,15 @@ public class Scrabble {
         } else {
             this.word = word.trim().toUpperCase();
         }
-        }
-
+    }
 
     public int score() {
-        int FullScore = 0;
-        int wordMultiplier = 1;
-
-        for (int i = 0; i < word.length(); i++) {
-            char letter = word.charAt(i);
-
-            if (letter == '{' && i + 2 < word.length() && word.charAt(i + 2) == '}') {
-                FullScore += letterMap.getOrDefault(word.charAt(i + 1), 0) * 2;
-                i += 2;
-            }
-
-            else if (letter == '[' && i + 2 < word.length() && word.charAt(i + 2) == ']') {
-                FullScore += letterMap.getOrDefault(word.charAt(i + 1), 0) * 3;
-                i += 2;
-            }
-
-
-            else if (letter == '{' && word.charAt(word.length() - 1) == '}') {
-                wordMultiplier = 2;
-
-            }
-
-            else if (letter == '[' && word.charAt(word.length() - 1) == ']') {
-                wordMultiplier = 3;
-
-            }
-
-            else if (letter != '}' && letter != ']') {
-                FullScore += letterMap.getOrDefault(letter, 0);
-            }
+        int fullScore = 0;
+        for (char letter : word.toCharArray()) {
+            fullScore += letterMap.getOrDefault(letter, 0);
         }
-
-        return FullScore * wordMultiplier;
+        return fullScore;
     }
+
 
 }
